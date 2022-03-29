@@ -1580,13 +1580,17 @@ vendor/lib64/vendor.qti.hardware.tui_comm@1.0.so
 # Vibrator
 vendor/firmware/aw8697_haptic.bin
 vendor/firmware/aw8697_rtp_1.bin
-vendor/lib64/libxiaomivibratoreffect.so
+vendor/lib64/libqtivibratoreffect.so
 vendor/firmware/seq_bin_wav1.bin
 vendor/firmware/seq_bin_wav2.bin
 vendor/firmware/seq_bin_wav3.bin
 vendor/firmware/seq_bin_wav4.bin
 vendor/firmware/seq_bin_wav5.bin
 vendor/firmware/seq_bin_wav6.bin
+vendor/firmware/seq_bin_wav7.bin
+vendor/firmware/seq_bin_wav8.bin
+vendor/firmware/seq_bin_wav9.bin
+vendor/firmware/seq_bin_wav10.bin
 
 # Video
 vendor/lib/libfastcrc.so

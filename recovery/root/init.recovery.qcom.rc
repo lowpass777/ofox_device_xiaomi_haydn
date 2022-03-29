@@ -1,6 +1,6 @@
 import /init.recovery.qcom_decrypt.rc
 
-service vendor.qti.vibrator /system/bin/vendor.qti.hardware.vibrator.service.haydn
+service vendor.qti.vibrator /system/bin/hw/vendor.qti.hardware.vibrator.service
     group root
     disabled
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
@@ -44,11 +44,25 @@ on fs
     # Set fscklog permission
     chown root system /dev/fscklogs/log
     chmod 0770 /dev/fscklogs/log
-    
 
+on post-fs
+    start boot-hal-1-1
+    
+on init
+    start hwservicemanager
+    
 on boot
     start health-hal-2-1
     chmod 0777 /system/bin/set_permissive.sh
     start set_permissive
     start vendor.qti.vibrator
+    start vibratorfeature-hal-1-0
     setprop sys.usb.config adb
+    
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+

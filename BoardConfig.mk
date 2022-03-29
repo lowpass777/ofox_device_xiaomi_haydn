@@ -5,6 +5,7 @@
 #
 
 DEVICE_PATH := device/xiaomi/haydn
+LOCAL_PATH := device/xiaomi/haydn
 
 #DUP
 BUILD_BROKEN_DUP_RULES := true
@@ -61,15 +62,21 @@ TARGET_FS_CONFIG_GEN := $(DEVICE_PATH)/config.fs
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_PAGESIZE := 4096
-BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_KERNEL_TAGS_OFFSET := 0x00000100
 BOARD_RAMDISK_OFFSET := 0x01000000
-
 BOARD_BOOT_HEADER_VERSION := 3
-BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc LLVM=1
 TARGET_KERNEL_ARCH := arm64
+#TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
+BOARD_BOOTIMG_HEADER_VERSION := 3
+TARGET_KERNEL_HEADER_ARCH := arm64
+
+#TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz-dtb
+#BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+#BOARD_PREBUILT_DTBIMAGE_DIR := $(DEVICE_PATH)/prebuilt/dtbs
+
+BOARD_INCLUDE_RECOVERY_DTBO := true
 
 BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
@@ -93,31 +100,20 @@ TARGET_KERNEL_SOURCE := kernel/xiaomi/haydn
 TARGET_KERNEL_CONFIG := vendor/haydn-qgki_defconfig
 
 # Kernel modules
-BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load))
-BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
-NEED_KERNEL_MODULE_RECOVERY := true
+#BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load))
+#BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
+#NEED_KERNEL_MODULE_RECOVERY := true
+
+#DTB/DTBO
+#BOARD_KERNEL_SEPARATED_DTBO := true
+BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
+#BOARD_MKBOOTIMG_ARGS += --vendor_cmdline $(VENDOR_CMDLINE)
+#BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE) --board ""
 
 
 # HIDL
-DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
-
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
-    $(DEVICE_PATH)/framework_compatibility_matrix.xml
-
-DEVICE_MANIFEST_FILE := \
-    $(DEVICE_PATH)/manifests/manifest_lahaina.xml \
-    $(DEVICE_PATH)/vibrator/haydn/aidl/vendor.qti.hardware.vibrator.service.haydn.xml \
-    $(DEVICE_PATH)/manifests/AHBF@2.1-service.xml \
-    $(DEVICE_PATH)/manifests/android.hardware.atrace@1.0-service.xml \
-    $(DEVICE_PATH)/manifests/android.hardware.gnss@2.1-service-qti.xml \
-    $(DEVICE_PATH)/manifests/android.hardware.neuralnetworks@1.3-service-qti.xml \
-    $(DEVICE_PATH)/manifests/c2_manifest_vendor.xml \
-    $(DEVICE_PATH)/manifests/fod.xml \
-    $(DEVICE_PATH)/manifests/manifest_android.hardware.drm@1.3-service.widevine.xml \
-    $(DEVICE_PATH)/manifests/vendor.qti.diag.hal.service.xml \
-    $(DEVICE_PATH)/manifests/vendor.qti.gnss@4.0-service.xml \
-    $(DEVICE_PATH)/manifests/vendor.qti.hardware.servicetracker@1.2-service.xml
+DEVICE_MATRIX_FILE := $(DEVICE_PATH)/recovery/root/vendor/etc/vintf/compatibility_matrix.xml
+DEVICE_MANIFEST_FILE := $(DEVICE_PATH)/manifest.xml
 
 # Metadata
 BOARD_USES_METADATA_PARTITION := true
