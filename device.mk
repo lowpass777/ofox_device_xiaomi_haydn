@@ -18,7 +18,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Inherit proprietary targets
-$(call inherit-product-if-exists, vendor/xiaomi/haydn/haydn-vendor.mk)
+#$(call inherit-product-if-exists, vendor/xiaomi/haydn/haydn-vendor.mk)
 
 # API
 PRODUCT_TARGET_VNDK_VERSION := 30
@@ -103,10 +103,9 @@ PRODUCT_PACKAGES += \
     android.hardware.health@2.1-impl-qti \
     android.hardware.health@2.1-service
     
-# Init scripts
-PRODUCT_PACKAGES += \
-    init.recovery.qcom.rc \
-    init.recovery.usb.rc
+#Init Recovery
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/recovery/root/init.recovery.qcom.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.qcom.rc 
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
@@ -154,8 +153,8 @@ TW_LOAD_VENDOR_MODULES := "xiaomi_touch.ko fts_touch_spi.ko fts_touch_spi_k2.ko 
 PRODUCT_PACKAGES += \
     vendor.qti.hardware.vibrator.service.haydn
 
-PRODUCT_COPY_FILES += \
-    $(DEVICE_PATH)/configs/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
+#PRODUCT_COPY_FILES += \
+#    $(DEVICE_PATH)/configs/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
       
 TARGET_RECOVERY_DEVICE_MODULES += \
     android.hardware.vibrator-ndk_platform \
