@@ -24,6 +24,7 @@
         </interface>
         <fqname>@1.0::IAtCmdFwd/AtCmdFwdService</fqname>
     </hal>
+    </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.sigma_miracast</name>
         <transport>hwbinder</transport>

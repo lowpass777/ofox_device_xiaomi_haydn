@@ -6,6 +6,9 @@
 
 DEVICE_PATH := device/xiaomi/haydn
 
+#DUP
+BUILD_BROKEN_DUP_RULES := true
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -22,7 +25,7 @@ TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := kryo385
 
 # APEX image
-DEXPREOPT_GENERATE_APEX_IMAGE := true
+#DEXPREOPT_GENERATE_APEX_IMAGE := true
 
 # A/B
 AB_OTA_UPDATER := true
@@ -67,8 +70,6 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOT_HEADER_VERSION)
 
 TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc LLVM=1
 TARGET_KERNEL_ARCH := arm64
-TARGET_KERNEL_CLANG_COMPILE := true
-TARGET_KERNEL_SOURCE := kernel/xiaomi/sm8350
 
 BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom
@@ -89,7 +90,7 @@ BOARD_KERNEL_CMDLINE += video=vfb:640x400,bpp=32,memsize=3072000
 TARGET_COMPILE_WITH_MSM_KERNEL := true
 TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_SOURCE := kernel/xiaomi/haydn
-TARGET_KERNEL_CONFIG := haydn_defconfig
+TARGET_KERNEL_CONFIG := vendor/haydn-qgki_defconfig
 
 # Kernel modules
 BOARD_VENDOR_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load))
@@ -102,11 +103,11 @@ DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
 DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
 
 DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
-    $(DEVICE_PATH)/framework_compatibility_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
+    $(DEVICE_PATH)/framework_compatibility_matrix.xml
 
 DEVICE_MANIFEST_FILE := \
     $(DEVICE_PATH)/manifests/manifest_lahaina.xml \
+    $(DEVICE_PATH)/vibrator/haydn/aidl/vendor.qti.hardware.vibrator.service.haydn.xml \
     $(DEVICE_PATH)/manifests/AHBF@2.1-service.xml \
     $(DEVICE_PATH)/manifests/android.hardware.atrace@1.0-service.xml \
     $(DEVICE_PATH)/manifests/android.hardware.gnss@2.1-service-qti.xml \
@@ -137,7 +138,7 @@ TARGET_COPY_OUT_PRODUCT := product
 # Partitions (Dynamic)
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := odm system system_ext vendor product
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200 # BOARD_SUPER_PARTITION_SIZE - 4MB
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 9122611200
 TARGET_USES_PREBUILT_DYNAMIC_PARTITIONS := true
 
 # Partitions (File systems)
@@ -168,6 +169,12 @@ TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/double_tap"
 
 # Power
 TARGET_TAP_TO_WAKE_NODE := "/sys/devices/virtual/touch/tp_dev/double_tap"
+
+# Properties
+TARGET_ODM_PROP += $(DEVICE_PATH)/odm.prop
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TARGET_SYSTEM_EXT_PROP += $(DEVICE_PATH)/system_ext.prop
+TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
 # QCOM
 BOARD_USES_QCOM_HARDWARE := true

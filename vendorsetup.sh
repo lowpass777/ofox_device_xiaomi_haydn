@@ -1,6 +1,6 @@
 #
 #	This file is part of the OrangeFox Recovery Project
-# 	Copyright (C) 2020-2021 The OrangeFox Recovery Project
+# 	Copyright (C) 2021-2022 The OrangeFox Recovery Project
 #
 #	OrangeFox is free software: you can redistribute it and/or modify
 #	it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 # 	Please maintain this if you use this script or any part of it
 #
 FDEVICE="haydn"
-#set -o xtrace
 
 fox_get_target_device() {
 local chkdev=$(echo "$BASH_SOURCE" | grep -w $FDEVICE)
@@ -44,7 +43,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
  	export ALLOW_MISSING_DEPENDENCIES=true
 	export OF_TARGET_DEVICES="haydnin,haydn"
 	export TARGET_DEVICE_ALT="haydnin"
-	export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER="1"
 	export CCACHE_DIR=$HOME/ccache
 	export USE_CCACHE=1
 	export CCACHE_EXEC=/usr/bin/ccache
@@ -52,6 +50,12 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         #Debug
         export FOX_INSTALLER_DEBUG_MODE="1"
         export OF_IGNORE_LOGICAL_MOUNT_ERRORS="1"
+        export FOX_USE_BASH_SHELL=1
+	export FOX_ASH_IS_BASH=1
+	export FOX_USE_TAR_BINARY=1
+	export FOX_USE_SED_BINARY=1
+	export FOX_USE_XZ_UTILS=1
+	export OF_ENABLE_LPTOOLS=1
 
         #Binaries
         export FOX_USE_SED_BINARY="1"
@@ -61,6 +65,9 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_ASH_IS_BASH="1"
         export FOX_USE_TAR_BINARY="1"
 	export FOX_USE_NANO_EDITOR="1"
+
+        #Magisk
+	export FOX_USE_SPECIFIC_MAGISK_ZIP="~/Magisk/Magisk.zip"
 
 	#Magiskboot
 	export OF_USE_MAGISKBOOT="1"
@@ -80,7 +87,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         export FOX_BUGGED_AOSP_ARB_WORKAROUND="1616300800"
 
         #Backup
-        export OF_SKIP_MULTIUSER_FOLDERS_BACKUP="1"
         export OF_QUICK_BACKUP_LIST="/boot;/data;"
 
 	# screen settings
@@ -100,10 +106,10 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         export FOX_DELETE_AROMAFM="1"
         export OF_USE_GREEN_LED="0"
 	export OF_NO_SPLASH_CHANGE="1"
-	export FOX_DELETE_MAGISK_ADDON="1"
+	export FOX_DELETE_MAGISK_ADDON="0"
 
         #Maintainer Stuff
-        export OF_MAINTAINER="LowPass777"
+        export OF_MAINTAINER="Eef"
         export FOX_VERSION="R11.1_0"
 
 	# run a process after formatting data to work-around MTP issues
