@@ -50,14 +50,9 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         #Debug
         export FOX_INSTALLER_DEBUG_MODE="1"
         export OF_IGNORE_LOGICAL_MOUNT_ERRORS="1"
-        export FOX_USE_BASH_SHELL=1
-	export FOX_ASH_IS_BASH=1
-	export FOX_USE_TAR_BINARY=1
-	export FOX_USE_SED_BINARY=1
-	export FOX_USE_XZ_UTILS=1
-	export OF_ENABLE_LPTOOLS=1
 
         #Binaries
+        export FOX_USE_BASH_SHELL=1
         export FOX_USE_SED_BINARY="1"
 	export FOX_USE_XZ_UTILS="1"
 	export FOX_USE_GREP_BINARY="1"
@@ -65,6 +60,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_ASH_IS_BASH="1"
         export FOX_USE_TAR_BINARY="1"
 	export FOX_USE_NANO_EDITOR="1"
+	export OF_ENABLE_LPTOOLS=1
 
         #Magisk
 	export FOX_USE_SPECIFIC_MAGISK_ZIP="~/Magisk/Magisk.zip"
