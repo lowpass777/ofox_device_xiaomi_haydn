@@ -80,20 +80,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     bootctl    
 
-# Display
-PRODUCT_PACKAGES += \
-    android.hardware.graphics.mapper@3.0-impl-qti-display \
-    android.hardware.graphics.mapper@4.0-impl-qti-display \
-    android.hardware.memtrack@1.0-impl \
-    android.hardware.memtrack@1.0-service \
-    vendor.qti.hardware.display.allocator-service \
-    vendor.qti.hardware.display.composer-service \
-    vendor.qti.hardware.display.mapper@2.0.vendor \
-
-PRODUCT_PACKAGES += \
-    vendor.display.config@1.15.vendor \
-    vendor.display.config@2.0.vendor
-
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 PRODUCT_BUILD_SUPER_PARTITION := false
@@ -101,7 +87,7 @@ PRODUCT_BUILD_SUPER_PARTITION := false
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
-	android.hardware.fastboot@1.0-impl-mock.recovery \
+    android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
         
 # Init scripts
