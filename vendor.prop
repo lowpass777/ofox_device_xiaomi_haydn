@@ -1,0 +1,48 @@
+# Crypto
+ro.crypto.dm_default_key.options_format.version=2
+ro.crypto.volume.metadata.method=dm-default-key
+
+# DPM
+persist.vendor.dpm.feature=1
+persist.vendor.dpm.idletimer.mode=default
+persist.vendor.dpm.nsrm.bkg.evt=3955
+persist.vendor.dpmhalservice.enable=1
+
+# DRM
+drm.service.enabled=true
+
+# FRP
+ro.frp.pst=/dev/block/bootdevice/by-name/frp
+
+# Gatekeeper
+vendor.gatekeeper.disable_spu=true
+
+# Perf
+ro.vendor.extension_library=libqti-perfd-client.so
+ro.vendor.perf.scroll_opt=0
+
+# Priv-app permissions
+ro.control_privapp_permissions=enforce
+
+# Qcom
+ro.vendor.qti.sys.fw.bservice_enable=true
+
+# Qcomsysd
+persist.vendor.qcomsysd.enabled=1
+
+# QSPM
+ro.vendor.qspm.enable=true
+
+# SKU
+ro.boot.product.vendor.sku=lahaina
+
+# Storage
+ro.incremental.enable=yes
+
+# Thermal
+vendor.sys.thermal.data.path=/data/vendor/thermal/
+
+# USB
+vendor.usb.diag.func.name=ffs
+vendor.usb.use_ffs_mtp=1
+

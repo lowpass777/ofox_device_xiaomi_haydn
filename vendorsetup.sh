@@ -46,7 +46,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export CCACHE_DIR=$HOME/ccache
 	export USE_CCACHE=1
 	export CCACHE_EXEC=/usr/bin/ccache
-	export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 
         #Debug
         export FOX_INSTALLER_DEBUG_MODE="1"
@@ -81,7 +80,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         export OF_DONT_PATCH_ENCRYPTED_DEVICE="1"
         export OF_NO_TREBLE_COMPATIBILITY_CHECK="1"
         export OF_PATCH_AVB20="1"
-        #export FOX_BUGGED_AOSP_ARB_WORKAROUND="1616300800"
+        export FOX_BUGGED_AOSP_ARB_WORKAROUND="1616300800"
 
         #Backup
         export OF_QUICK_BACKUP_LIST="/boot;/data;"
