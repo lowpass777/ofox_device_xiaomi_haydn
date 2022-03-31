@@ -46,6 +46,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export CCACHE_DIR=$HOME/ccache
 	export USE_CCACHE=1
 	export CCACHE_EXEC=/usr/bin/ccache
+	export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
 
         #Debug
         export FOX_INSTALLER_DEBUG_MODE="1"
