@@ -5,14 +5,7 @@ service vendor.qti.vibrator /system/bin/hw/vendor.qti.hardware.vibrator.service
     disabled
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     seclabel u:r:recovery:s0
-    
-service set_permissive /system/bin/set_permissive.sh
-    user root
-    group root
-    disabled
-    oneshot 
-    seclabel u:r:recovery:s0
-
+   
 on property:twrp.modules.loaded=true
     # Load ADSP firmware for PMIC
     wait /sys/kernel/boot_adsp/boot
@@ -53,8 +46,6 @@ on init
     
 on boot
     start health-hal-2-1
-    chmod 0777 /system/bin/set_permissive.sh
-    start set_permissive
     start vendor.qti.vibrator
     setprop sys.usb.config adb
     

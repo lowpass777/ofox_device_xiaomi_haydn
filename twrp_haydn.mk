@@ -4,15 +4,18 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# Release name
+PRODUCT_RELEASE_NAME := haydn
+DEVICE_PATH := device/xiaomi/haydn
+LOCAL_PATH := device/xiaomi/haydn
+
 # Inherit from those products. Most specific first
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-#$(call inherit-product, $(SRC_TARGET_DIR)/product/emulated_storage.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 
 # Inherit from haydn device
-$(call inherit-product, device/xiaomi/haydn/device.mk)
+$(call inherit-product, $(DEVICE_PATH)/device.mk)
 
-$(call inherit-product, vendor/twrp/config/common.mk)
+#$(call inherit-product, vendor/twrp/config/common.mk)
 
 PRODUCT_NAME := twrp_haydn
 PRODUCT_DEVICE := haydn
