@@ -5,12 +5,6 @@ service vendor.qti.vibrator /system/bin/hw/vendor.qti.hardware.vibrator.service
     disabled
     setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
     seclabel u:r:recovery:s0
-
-service vibratorfeature-hal-1-0 /system/bin/hw/vendor.xiaomi.hardware.vibratorfeature@1.0-service
-    group root
-    disabled
-    setenv LD_LIBRARY_PATH /vendor/lib64:/vendor/lib:/system/lib64:/system/lib:/sbin
-    seclabel u:r:recovery:s0
     
 service set_permissive /system/bin/set_permissive.sh
     user root
@@ -62,7 +56,6 @@ on boot
     chmod 0777 /system/bin/set_permissive.sh
     start set_permissive
     start vendor.qti.vibrator
-    start vibratorfeature-hal-1-0
     setprop sys.usb.config adb
     
 service hwservicemanager /system/bin/hwservicemanager

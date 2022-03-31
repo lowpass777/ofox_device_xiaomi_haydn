@@ -63,7 +63,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_ENABLE_LPTOOLS=1
 
         #Magisk
-	export FOX_USE_SPECIFIC_MAGISK_ZIP="~/Magisk/Magisk.zip"
+	export FOX_USE_SPECIFIC_MAGISK_ZIP="~/magisk/Magisk.zip"
 
 	#Magiskboot
 	export OF_USE_MAGISKBOOT="1"
