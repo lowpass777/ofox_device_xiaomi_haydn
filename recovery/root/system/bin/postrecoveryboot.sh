@@ -1,40 +1,78 @@
-#!/sbin/sh
-#
-#	This file is part of the OrangeFox Recovery Project
-# 	Copyright (C) 2019-2022 The OrangeFox Recovery Project
-#
-#	OrangeFox is free software: you can redistribute it and/or modify
-#	it under the terms of the GNU General Public License as published by
-#	the Free Software Foundation, either version 3 of the License, or
-#	any later version.
-#
-#	OrangeFox is distributed in the hope that it will be useful,
-#	but WITHOUT ANY WARRANTY; without even the implied warranty of
-#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#	GNU General Public License for more details.
-#
-# 	This software is released under GPL version 3 or any later version.
-#	See <http://www.gnu.org/licenses/>.
-#
-# 	Please maintain this if you use this script or any part of it
-#
-#
-# TODO: this kludge is needed to prevent issues with mounting
-# system and vendor in some zip installers and in the gui
-#
+#!/system/bin/sh
 
-set_read_write_partitions() {
-  local F=$(getprop "ro.orangefox.fastbootd");
-  [ "$F" = "1" ] && return; # don't run this in fastbootd mode
 
-  local Parts=("system" "system_ext" "vendor" "product");
-  for i in "${Parts[@]}"
-  do
-     echo "I:OrangeFox: setting $i to read/write" >> /tmp/recovery.log;
-     blockdev --setrw /dev/block/mapper/$i;
-  done
+# find necessary modules for touchscreen, etc. to ensure no mismatch with kernel
+copy-modules()
+{
+    if grep -Fq twrpfastboot /proc/cmdline
+    then
+        echo "using ramdisk modules (fastboot boot)"
+        return
+    fi
+
+    if [ -f /lib/modules/modules.load.recovery -a -f /lib/modules/xiaomi_touch.ko ] && lsmod | grep -Fq xiaomi_touch
+    then
+        echo "using vendor_boot modules"
+        exit 0
+    fi
+
+    suffix=$(getprop ro.boot.slot_suffix)
+    if [ -z "$suffix" ]
+    then
+        suffix="_$(getprop ro.boot.slot)"
+    fi
+
+    echo "using vendor$suffix modules"
+    mkdir /v
+    mount -t ext4 -o ro /dev/block/mapper/vendor$suffix /v
+    rm -f /vendor/lib/modules/*
+    cp -afR /v/lib/modules/* /vendor/lib/modules/
+    umount /v
+    rmdir /v
 }
 
-set_read_write_partitions;
-exit 0;
-#
+install-touch()
+{
+    if [ -f /lib/modules/modules.load.recovery -a -f /lib/modules/xiaomi_touch.ko ] && lsmod | grep -Fq xiaomi_touch
+    then
+        if grep -Fq twrpfastboot /proc/cmdline; then
+            MODULES=$(lsmod | tail +2 | awk '{ printf $1 }')
+            for i in $MODULES
+            do
+                rmmod $i
+            done
+        else
+            echo "vendor_boot touchscreen modules already loaded"
+            exit 0
+        fi
+    fi
+
+    if [ ! -f /vendor/lib/modules/xiaomi_touch.ko ]
+    then
+        echo "! vendor touchscreen modules not found"
+        exit 1
+    fi
+
+    echo "loading vendor touchscreen modules"
+    device=$(getprop ro.boot.hardware.sku)
+    if [ "${device}" == "haydn" ] || [ "${device}" == "haydn_in" ] || [ "${device}" == "haydnpro" ]; then
+        for module in $(modprobe -D -d /vendor/lib/modules focaltech_touch  | grep modules)
+        do
+            insmod /vendor/lib/modules/$(basename $module)
+        done
+        exit 0
+    fi
+
+    for module in $(modprobe -D -d /vendor/lib/modules fts_touch_spi  | grep modules)
+    do
+        insmod /vendor/lib/modules/$(basename $module)
+    done
+}
+
+copy-modules
+install-touch
+
+exit 0
+
+
+
