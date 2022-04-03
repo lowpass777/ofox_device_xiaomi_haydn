@@ -15,7 +15,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 # Inherit from haydn device
 $(call inherit-product, $(DEVICE_PATH)/device.mk)
 
-#$(call inherit-product, vendor/twrp/config/common.mk)
+$(call inherit-product, vendor/twrp/config/common.mk)
 
 PRODUCT_NAME := twrp_haydn
 PRODUCT_DEVICE := haydn
