@@ -9,6 +9,14 @@ DEVICE_PATH := device/xiaomi/haydn
 
 BUILD_BROKEN_DUP_RULES := true
 
+# Manual kernel
+#TARGET_COMPILE_WITH_MSM_KERNEL := true
+#TARGET_KERNEL_CLANG_COMPILE := true
+#TARGET_KERNEL_SOURCE := kernel/xiaomi/haydn
+#TARGET_KERNEL_CONFIG := vendor/haydn-qgki_defconfig
+#TARGET_KERNEL_ADDITIONAL_FLAGS := DTC_EXT=$(shell pwd)/prebuilts/misc/linux-x86/dtc/dtc LLVM=1
+#TARGET_KERNEL_ARCH := arm64
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -38,29 +46,6 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 
-# Display
-TARGET_SCREEN_DENSITY := 440
-
-# HIDL
-DEVICE_MATRIX_FILE := $(DEVICE_PATH)/compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE := $(DEVICE_PATH)/framework_manifest.xml
-
-DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE := \
-    $(DEVICE_PATH)/framework_compatibility_matrix.xml \
-    vendor/lineage/config/device_framework_matrix.xml
-
-DEVICE_MANIFEST_FILE := \
-    $(DEVICE_PATH)/manifests/manifest_lahaina.xml \
-    $(DEVICE_PATH)/manifests/AHBF@2.1-service.xml \
-    $(DEVICE_PATH)/manifests/android.hardware.atrace@1.0-service.xml \
-    $(DEVICE_PATH)/manifests/android.hardware.gnss@2.1-service-qti.xml \
-    $(DEVICE_PATH)/manifests/android.hardware.neuralnetworks@1.3-service-qti.xml \
-    $(DEVICE_PATH)/manifests/c2_manifest_vendor.xml \
-    $(DEVICE_PATH)/manifests/fod.xml \
-    $(DEVICE_PATH)/manifests/manifest_android.hardware.drm@1.3-service.widevine.xml \
-    $(DEVICE_PATH)/manifests/vendor.qti.diag.hal.service.xml \
-    $(DEVICE_PATH)/manifests/vendor.qti.gnss@4.0-service.xml \
-    $(DEVICE_PATH)/manifests/vendor.qti.hardware.servicetracker@1.2-service.xml
 # Kernel
 BOARD_KERNEL_CMDLINE += androidboot.console=ttyMSM0
 BOARD_KERNEL_CMDLINE += androidboot.hardware=qcom

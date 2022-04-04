@@ -22,10 +22,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
 PRODUCT_TARGET_VNDK_VERSION := 30
 PRODUCT_SHIPPING_API_LEVEL := 30
 
-# Soong namespaces
-PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
-
 # A/B
 ENABLE_VIRTUAL_AB := true
 AB_OTA_UPDATER := true
@@ -69,7 +65,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.1-impl-qti \
     android.hardware.boot@1.1-impl-qti.recovery \
-    android.hardware.boot@1.1-service \
+    android.hardware.boot@1.1-service 
 
 PRODUCT_PACKAGES += \
     bootctrl.lahaina \
@@ -92,10 +88,14 @@ PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
         
-# Init scripts
+# Init Recovery
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/recovery/root/init.recovery.qcom.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.qcom.rc 
+
+# Health
 PRODUCT_PACKAGES += \
-    init.recovery.qcom.rc \
-    init.recovery.usb.rc
+    android.hardware.health@2.1-impl \
+    android.hardware.health@2.1-service
 
 # Update engine
 PRODUCT_PACKAGES += \
