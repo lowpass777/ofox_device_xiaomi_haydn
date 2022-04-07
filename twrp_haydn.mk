@@ -10,7 +10,7 @@ DEVICE_PATH := device/xiaomi/haydn
 LOCAL_PATH := device/xiaomi/haydn
 
 # Inherit from those products. Most specific first
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
+#$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 
 # Inherit from haydn device
 $(call inherit-product, $(DEVICE_PATH)/device.mk)

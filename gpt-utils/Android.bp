@@ -28,7 +28,6 @@ cc_library {
         "-Wall",
         "-Werror",
         "-D_BSG_FRAMEWORK_KERNEL_HEADERS",
-        "-D__GENERIC_KERNEL_HEADERS",
     ],
     srcs: [
         "gpt-utils.cpp",

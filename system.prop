@@ -1,17 +1,11 @@
-ro.treble.enabled=true
-ro.crypto.allow_encrypt_override=true
-ro.crypto.dm_default_key.options_format.version=2
-ro.crypto.volume.filenames_mode=aes-256-cts
-ro.crypto.volume.metadata.method=dm-default-key
-vendor.gatekeeper.disable_spu=true
-ro.product.vendor.marketname=Redmi K40 Pro+
-ro.product.board=haydn
-ro.board.platform=lahaina 
-sys.usb.controller=a600000.dwc3
-sys.usb.rndis.func.name=rndis_bam
-sys.usb.rmnet.func.name=rmnet_bam
-persist.sys.isUsbOtgEnabled=true
-ro.boot.dynamic_partitions=true
 ro.adb.secure=0
-fbe.metadata.wrappedkey=true
+ro.boot.dynamic_partitions=true
 
+# Gatekeeper
+vendor.gatekeeper.disable_spu=true
+
+# Battery Property
+ro.charger.enable_suspend=1
+
+# Android 12
+ro.build.version.release=12

@@ -16,11 +16,24 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/updatable_apex.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/virtual_ab_ota.mk)
 
 # Installs gsi keys into ramdisk, to boot a developer GSI with verified boot.
+# Include GSI keys
 $(call inherit-product, $(SRC_TARGET_DIR)/product/gsi_keys.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # API
 PRODUCT_TARGET_VNDK_VERSION := 30
-PRODUCT_SHIPPING_API_LEVEL := 30
+PRODUCT_SHIPPING_API_LEVEL := 29
+
+# Init Recovery
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/recovery/root/init.recovery.qcom.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.qcom.rc    
+
+# AVB
+PRODUCT_PACKAGES += \
+    q-gsi.avbpubkey \
+    r-gsi.avbpubkey \
+    s-gsi.avbpubkey
 
 # A/B
 ENABLE_VIRTUAL_AB := true
@@ -63,16 +76,14 @@ PRODUCT_PACKAGES += \
     
 # Boot control
 PRODUCT_PACKAGES += \
+    bootctrl.lahaina \
+    bootctrl.lahaina.recovery \
     android.hardware.boot@1.1-impl-qti \
     android.hardware.boot@1.1-impl-qti.recovery \
     android.hardware.boot@1.1-service 
 
-PRODUCT_PACKAGES += \
-    bootctrl.lahaina \
-    bootctrl.lahaina.recovery 
-    
-PRODUCT_PACKAGES_DEBUG += \
-    bootctl    
+PRODUCT_HOST_PACKAGES += \
+    libandroidicu 
 
 PRODUCT_PACKAGES += \
     qcom_decrypt \
@@ -80,17 +91,12 @@ PRODUCT_PACKAGES += \
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-PRODUCT_BUILD_SUPER_PARTITION := false
 
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
     android.hardware.fastboot@1.0-impl-mock.recovery \
     fastbootd
-        
-# Init Recovery
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/recovery/root/init.recovery.qcom.rc:$(TARGET_COPY_OUT_RECOVERY)/root/init.recovery.qcom.rc 
 
 # Health
 PRODUCT_PACKAGES += \
@@ -106,19 +112,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_DEBUG += \
     update_engine_client
 
-# platform
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
-VENDOR_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
-BOOT_SECURITY_PATCH := $(PLATFORM_SECURITY_PATCH)
+TW_LOAD_VENDOR_MODULES := "xiaomi_touch.ko fts_touch_spi.ko focaltech_touch.ko adsp_loader_dlkm.ko qti_battery_charger_main.ko"
 
-TW_LOAD_VENDOR_MODULES := "xiaomi_touch.ko fts_touch_spi.ko fts_touch_spi_k2.ko focaltech_touch.ko adsp_loader_dlkm.ko qti_battery_charger.ko"
-     
 TARGET_RECOVERY_DEVICE_MODULES += \
     libion \
     libandroidicu \
     vendor.display.config@1.0 \
     vendor.display.config@2.0 \
-    libdisplayconfig.qti 
+    libdisplayconfig.qti
 
 RECOVERY_LIBRARY_SOURCE_FILES += \
     $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
