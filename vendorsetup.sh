@@ -48,7 +48,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
         #Debug
         export FOX_INSTALLER_DEBUG_MODE="1"
-        export OF_IGNORE_LOGICAL_MOUNT_ERRORS="1"
 
         #Binaries
 	export FOX_USE_BASH_SHELL=1
@@ -61,13 +60,12 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_REPLACE_BUSYBOX_PS=1
 
         #Magisk
-	#export FOX_USE_SPECIFIC_MAGISK_ZIP="/home/android/Magisk/Magisk-24.3.zip"
+	export FOX_USE_SPECIFIC_MAGISK_ZIP="/home/android/Magisk/Magisk-24.3.zip"
 
 	#Magiskboot
 	export OF_USE_MAGISKBOOT="1"
-	export OF_USE_NEW_MAGISKBOOT=1
 	export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES="1"
-	export OF_PATCH_VBMETA_FLAG="1"
+	export OF_AB_DEVICE="1"
 
         # OTA & MIUI
         export OF_SUPPORT_ALL_BLOCK_OTA_UPDATES="1"
@@ -76,7 +74,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         export OF_DONT_PATCH_ENCRYPTED_DEVICE="1"
         export OF_NO_TREBLE_COMPATIBILITY_CHECK="1"
         export OF_PATCH_AVB20="1"
-        #export FOX_BUGGED_AOSP_ARB_WORKAROUND="1616300800"
 
 	# screen settings
 	export OF_SCREEN_H=2400
@@ -86,8 +83,6 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export OF_CLOCK_POS="1"
 
 	#Partitions
-        export FOX_RECOVERY_SYSTEM_PARTITION="/dev/block/mapper/system"
-	export FOX_RECOVERY_VENDOR_PARTITION="/dev/block/mapper/vendor"
 	export OF_VIRTUAL_AB_DEVICE="1"
 
         #Features
@@ -98,9 +93,8 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
         export FOX_VERSION="R11.1_0"
 
 	# -- add settings for R11 --
-	export FOX_R11=1
+	export OF_USE_TWRP_SAR_DETECT=1
 	export OF_DISABLE_MIUI_OTA_BY_DEFAULT=1
-	export OF_QUICK_BACKUP_LIST="/boot;/data;"
 	# -- end R11 settings 
 
 	# run a process after formatting data to work-around MTP issues
