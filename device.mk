@@ -4,8 +4,6 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# ALLOW_MISSING_DEPENDENCIES := true
-
 DEVICE_PATH := device/xiaomi/haydn
 
 # Inherit from common AOSP config
