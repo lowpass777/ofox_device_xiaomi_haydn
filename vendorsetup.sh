@@ -60,7 +60,7 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 	export FOX_REPLACE_BUSYBOX_PS=1
 
         #Magisk
-	export FOX_USE_SPECIFIC_MAGISK_ZIP="/home/android/Magisk/Magisk-24.3.zip"
+	export FOX_USE_SPECIFIC_MAGISK_ZIP="/home/android/Magisk/Magisk.zip"
 
 	#Magiskboot
 	export OF_USE_MAGISKBOOT="1"
