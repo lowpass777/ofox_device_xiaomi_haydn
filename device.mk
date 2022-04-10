@@ -77,4 +77,8 @@ TW_LOAD_VENDOR_MODULES := "xiaomi_touch.ko fts_touch_spi.ko focaltech_touch.ko a
 
 PRODUCT_COPY_FILES += \
     $(OUT_DIR)/target/product/haydn/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
+    
+# OEM otacert
+PRODUCT_EXTRA_RECOVERY_KEYS += \
+    vendor/recovery/security/miui
         
