@@ -73,7 +73,7 @@ BOARD_MKBOOTIMG_ARGS += --cmdline "twrpfastboot=1"
 
 # Kenel dtb
 # BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/$(PRODUCT_RELEASE_NAME)/dtb
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 
 # Kenel dtbo
