@@ -51,6 +51,7 @@ tuner-simple.ko
 mxl301rf.ko
 led-class-flash.ko
 platform_dlkm.ko
+focaltech_touch.ko
 rdbg.ko
 msm_drm.ko
 hdmi_dlkm.ko
@@ -66,6 +67,7 @@ e4000.ko
 native_dlkm.ko
 r820t.ko
 tuner-types.ko
+qti_battery_charger_main.ko
 mbhc_dlkm.ko
 tda9887.ko
 mc44s803.ko
