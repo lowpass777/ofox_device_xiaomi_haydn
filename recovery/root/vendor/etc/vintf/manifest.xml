@@ -49,6 +49,10 @@
         </interface>
         <fqname>@2.0::IBluetoothAudioProvidersFactory/default</fqname>
     </hal>
+    <hal format="aidl" override="true">
+        <name>android.hardware.vibrator</name>
+        <fqname>IVibrator/vibratorfeature</fqname>
+    </hal>
     <hal format="hidl">
         <name>android.hardware.camera.provider</name>
         <transport>hwbinder</transport>

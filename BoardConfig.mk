@@ -150,8 +150,8 @@ TARGET_USES_MKE2FS := true
 TW_NO_SCREEN_BLANK := true
 TW_EXCLUDE_APEX := true
 TW_QCOM_ATS_OFFSET := 1632508085000
-TW_NO_HAPTICS := true
-# TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
+TW_SUPPORT_INPUT_AIDL_HAPTICS :=true
 
 # SEPolicy
 -include device/xiaomi/raphael/sepolicy/recovery-sepolicy.mk

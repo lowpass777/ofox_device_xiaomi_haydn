@@ -13,6 +13,3 @@ ro.boot.product.vendor.sku=lahaina
 # USB
 vendor.usb.diag.func.name=ffs
 vendor.usb.use_ffs_mtp=1
-
-# Android 12
-ro.build.version.release=12

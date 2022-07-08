@@ -108,6 +108,10 @@
         </interface>
         <fqname>@1.0::IAtCmdFwd/AtCmdFwdService</fqname>
     </hal>
+    <hal format="aidl" override="true">
+        <name>android.hardware.vibrator</name>
+        <fqname>IVibrator/vibratorfeature</fqname>
+    </hal>
     <hal format="hidl">
         <name>vendor.qti.hardware.sigma_miracast</name>
         <transport>hwbinder</transport>
